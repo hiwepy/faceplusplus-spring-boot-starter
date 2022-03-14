@@ -26,7 +26,7 @@ import com.google.common.collect.ImmutableMap;
 import com.faceplusplus.spring.boot.req.RecordingAppsCollectionConfig;
 import com.faceplusplus.spring.boot.req.RecordingConfig;
 import com.faceplusplus.spring.boot.req.RecordingExtensionServiceConfig;
-import com.faceplusplus.spring.boot.req.RecordingFileConfig;
+import com.faceplusplus.spring.boot.req.FacesetBo;
 import com.faceplusplus.spring.boot.req.RecordingMode;
 import com.faceplusplus.spring.boot.req.RecordingSnapshotConfig;
 import com.faceplusplus.spring.boot.req.RecordingStorageConfig;
@@ -81,7 +81,7 @@ public class AgoraCloudRecordingAsyncOperations extends AgoraCloudRecordingOpera
      */
 	public void asyncStartRecording(String channelName, String uid, String token, String resourceId,
 									RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 			RecordingStorageConfig storageConfig,
 			Consumer<CloudRecordingStartResponse> consumer) throws IOException {
 		this.asyncStartRecording(channelName, uid, token, resourceId, RecordingMode.MIX, null, recordingConfig, recordingFileConfig, null, storageConfig, null, consumer);
@@ -108,7 +108,7 @@ public class AgoraCloudRecordingAsyncOperations extends AgoraCloudRecordingOpera
      */
 	public void asyncStartRecording(String channelName, String uid, String token, String resourceId, RecordingMode mode,
 			RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 			RecordingStorageConfig storageConfig,
 			Consumer<CloudRecordingStartResponse> consumer) throws IOException {
 		this.asyncStartRecording(channelName, uid, token, resourceId, mode, null, recordingConfig, recordingFileConfig, null, storageConfig, null, consumer);
@@ -137,7 +137,7 @@ public class AgoraCloudRecordingAsyncOperations extends AgoraCloudRecordingOpera
 	public void asyncStartRecording(String channelName, String uid, String token, String resourceId, RecordingMode mode,
 			RecordingAppsCollectionConfig appsCollection,
 			RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 			RecordingStorageConfig storageConfig,
 			Consumer<CloudRecordingStartResponse> consumer) throws IOException {
 		this.asyncStartRecording(channelName, uid, token, resourceId, mode, appsCollection, recordingConfig, recordingFileConfig, null, storageConfig, null, consumer);
@@ -167,7 +167,7 @@ public class AgoraCloudRecordingAsyncOperations extends AgoraCloudRecordingOpera
 	public void asyncStartRecording(String channelName, String uid, String token, String resourceId, RecordingMode mode,
 			RecordingAppsCollectionConfig appsCollection,
 			RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 		    RecordingSnapshotConfig snapshotConfig,
 			RecordingStorageConfig storageConfig,
 			Consumer<CloudRecordingStartResponse> consumer) throws IOException {
@@ -199,7 +199,7 @@ public class AgoraCloudRecordingAsyncOperations extends AgoraCloudRecordingOpera
 	public void asyncStartRecording(String channelName, String uid, String token, String resourceId, RecordingMode mode,
 			RecordingAppsCollectionConfig appsCollection,
 			RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 		    RecordingSnapshotConfig snapshotConfig,
 			RecordingStorageConfig storageConfig,
 			RecordingExtensionServiceConfig extensionServiceConfig,

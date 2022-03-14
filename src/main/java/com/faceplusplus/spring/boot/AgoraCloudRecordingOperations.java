@@ -26,7 +26,7 @@ import com.google.common.collect.Maps;
 import com.faceplusplus.spring.boot.req.RecordingAppsCollectionConfig;
 import com.faceplusplus.spring.boot.req.RecordingConfig;
 import com.faceplusplus.spring.boot.req.RecordingExtensionServiceConfig;
-import com.faceplusplus.spring.boot.req.RecordingFileConfig;
+import com.faceplusplus.spring.boot.req.FacesetBo;
 import com.faceplusplus.spring.boot.req.RecordingMode;
 import com.faceplusplus.spring.boot.req.RecordingSnapshotConfig;
 import com.faceplusplus.spring.boot.req.RecordingStorageConfig;
@@ -51,7 +51,7 @@ import org.springframework.util.StringUtils;
 public class AgoraCloudRecordingOperations extends AgoraOperations {
 
 	protected final static RecordingConfig DEFAULT_RECORDING_CONFIG = new RecordingConfig(new TranscodingConfig());
-	protected final static RecordingFileConfig DEFAULT_RECORDING_FILE_CONFIG = new RecordingFileConfig();
+	protected final static FacesetBo DEFAULT_RECORDING_FILE_CONFIG = new FacesetBo();
 
 	public AgoraCloudRecordingOperations(AgoraTemplate agoraTemplate) {
 		super(agoraTemplate);
@@ -154,7 +154,7 @@ public class AgoraCloudRecordingOperations extends AgoraOperations {
      */
 	public CloudRecordingStartResponse startRecording(String channelName, String uid, String token, String resourceId,
 													  RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 			RecordingStorageConfig storageConfig) throws IOException {
 		return this.startRecording(channelName, uid, token, resourceId, RecordingMode.MIX, null, recordingConfig, recordingFileConfig, null, storageConfig, null);
 	}
@@ -179,7 +179,7 @@ public class AgoraCloudRecordingOperations extends AgoraOperations {
      */
 	public CloudRecordingStartResponse startRecording(String channelName, String uid, String token, String resourceId, RecordingMode mode,
 			RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 			RecordingStorageConfig storageConfig) throws IOException {
 		return this.startRecording(channelName, uid, token, resourceId, mode, null, recordingConfig, recordingFileConfig, null, storageConfig, null);
 	}
@@ -207,7 +207,7 @@ public class AgoraCloudRecordingOperations extends AgoraOperations {
 	public CloudRecordingStartResponse startRecording(String channelName, String uid, String token, String resourceId, RecordingMode mode,
 			RecordingAppsCollectionConfig appsCollection,
 			RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 			RecordingStorageConfig storageConfig) throws IOException {
 		return this.startRecording(channelName, uid, token, resourceId, mode, appsCollection, recordingConfig, recordingFileConfig, null, storageConfig, null);
 	}
@@ -235,7 +235,7 @@ public class AgoraCloudRecordingOperations extends AgoraOperations {
 	public CloudRecordingStartResponse startRecording(String channelName, String uid, String token, String resourceId, RecordingMode mode,
 			RecordingAppsCollectionConfig appsCollection,
 			RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 		    RecordingSnapshotConfig snapshotConfig,
 			RecordingStorageConfig storageConfig) throws IOException {
 		return this.startRecording(channelName, uid, token, resourceId, mode, appsCollection, recordingConfig, recordingFileConfig, snapshotConfig, storageConfig, null);
@@ -265,7 +265,7 @@ public class AgoraCloudRecordingOperations extends AgoraOperations {
 	public CloudRecordingStartResponse startRecording(String channelName, String uid, String token, String resourceId, RecordingMode mode,
 			RecordingAppsCollectionConfig appsCollection,
 			RecordingConfig recordingConfig,
-		    RecordingFileConfig recordingFileConfig,
+		    FacesetBo recordingFileConfig,
 		    RecordingSnapshotConfig snapshotConfig,
 			RecordingStorageConfig storageConfig,
 			RecordingExtensionServiceConfig extensionServiceConfig) throws IOException {

@@ -50,9 +50,9 @@ public class AgoraOkHttp3Template implements InitializingBean {
 
 	protected OkHttpClient okhttp3Client;
 	protected ObjectMapper objectMapper;
-	protected AgoraProperties agoraProperties;
+	protected FaceppProperties agoraProperties;
 
-	public AgoraOkHttp3Template(OkHttpClient okhttp3Client, ObjectMapper objectMapper, AgoraProperties agoraProperties) {
+	public AgoraOkHttp3Template(OkHttpClient okhttp3Client, ObjectMapper objectMapper, FaceppProperties agoraProperties) {
 		this.okhttp3Client = okhttp3Client;
 		this.objectMapper = objectMapper;
 		this.agoraProperties = agoraProperties;

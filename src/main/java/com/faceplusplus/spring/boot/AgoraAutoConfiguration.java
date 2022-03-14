@@ -14,13 +14,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import okhttp3.OkHttpClient;
 
 @Configuration
-@EnableConfigurationProperties({ AgoraProperties.class})
+@EnableConfigurationProperties({ FaceppProperties.class})
 public class AgoraAutoConfiguration {
 
 	@Bean
 	public AgoraOkHttp3Template agoraOkHttp3Template(ObjectProvider<OkHttpClient> okhttp3ClientProvider,
 													 ObjectProvider<ObjectMapper> objectMapperProvider,
-													 AgoraProperties poolProperties) {
+													 FaceppProperties poolProperties) {
 
 		OkHttpClient okhttp3Client = okhttp3ClientProvider.getIfAvailable(() -> new OkHttpClient.Builder().build());
 
@@ -40,7 +40,7 @@ public class AgoraAutoConfiguration {
 	@Bean
 	public AgoraTemplate agoraTemplate(ObjectProvider<AgoraUserIdProvider> agoraUserIdProvider,
 									   AgoraOkHttp3Template agoraOkHttp3Template,
-									   AgoraProperties poolProperties) {
+									   FaceppProperties poolProperties) {
 		return new AgoraTemplate(agoraUserIdProvider.getIfAvailable(() -> {
 			return new AgoraUserIdProvider() {};
 		}), agoraOkHttp3Template, poolProperties );

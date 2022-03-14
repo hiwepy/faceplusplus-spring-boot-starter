@@ -15,35 +15,41 @@
  */
 package com.faceplusplus.spring.boot;
 
+import com.faceplusplus.spring.boot.req.FacesetBo;
 import com.faceplusplus.spring.boot.resp.ChannelUserListResponse;
-import com.faceplusplus.spring.boot.resp.ChannelUserStateResponse;
+import com.faceplusplus.spring.boot.resp.FacesetCreateResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableMap;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
- * 1、频道管理
+ * 1、人脸库管理相关接口
  * https://docs.agora.io/cn/Video/channel_management_overview?platform=RESTful
  */
 public class AgoraChannelManagerOperations extends AgoraOperations {
 
-	public AgoraChannelManagerOperations(AgoraTemplate agoraTemplate) {
-		super(agoraTemplate);
+	public AgoraChannelManagerOperations(AgoraTemplate agoraTemplate, ObjectMapper objectMapper) {
+		super(agoraTemplate, objectMapper);
 	}
 
 	/**
-	 * 1、查询在线频道信息 > 查询用户状态
-	 * 该方法可查询指定频道中某个用户的状态。请求成功后，返回的参数包括用户是否在频道中、加入频道的时间和用户角色等。
-	 * API：https://docs.agora.io/cn/Video/rtc_channel_management_restfulapi?platform=RESTful#%E6%9F%A5%E8%AF%A2%E5%9C%A8%E7%BA%BF%E9%A2%91%E9%81%93%E4%BF%A1%E6%81%AF
-	 * @param uid 字符串内容为云端录制服务在频道内使用的 UID，用于标识该录制服务，例如"527841"。需满足以下条件：
-	 * a、取值范围 1 到 (232-1)，不可设置为 0。
-	 * b、不能与当前频道内的任何 UID 重复。
-	 * c、云端录制不支持 String 用户 ID（User Account），请确保该字段引号内为整型 UID，且频道内所有用户均使用整型 UID。
-	 * @param channelName 频道名称
+	 * 1、人脸库管理相关接口 > 创建人脸库 API
+	 * 创建一个人脸的集合 FaceSet，用于存储人脸标识 face_token。一个 FaceSet 能够存储10000个 face_token。
+	 * 试用API Key可以创建1000个FaceSet，正式API Key可以创建10000个FaceSet。
+	 * API：https://console.faceplusplus.com.cn/documents/4888391
+	 * @param faceset 人脸库信息
 	 * @return 操作结果
 	 */
-	public ChannelUserStateResponse getChannelUserState(String uid, String channelName) throws IOException {
-		String reqUrl = AgoraApiAddress.CHANNEL_USER_STATE.getUrl(getAgoraProperties().getAppId(), uid, channelName);
-		ChannelUserStateResponse resp = super.get(AgoraApiAddress.CHANNEL_USER_STATE, reqUrl, ChannelUserStateResponse.class);
+	public FacesetCreateResponse createFaceset(FacesetBo faceset) throws IOException {
+		String reqUrl = AgoraApiAddress.FACESET_CREATE.getUrl();
+		Map params = new ImmutableMap.Builder<String, Object>()
+				.put("api_key", getAgoraProperties().getAppId())
+				.put("api_secret", getAgoraProperties().getAppCertificate())
+				.putAll(getObjectMapper().readValue(getObjectMapper().writeValueAsString(faceset), Map.class))
+				.build();
+		FacesetCreateResponse resp = super.post(AgoraApiAddress.FACESET_CREATE, reqUrl, params, null, FacesetCreateResponse.class);
 		return resp;
 	}
 

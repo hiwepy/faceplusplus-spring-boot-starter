@@ -1,24 +1,9 @@
 package com.faceplusplus.spring.boot;
 
-import java.io.IOException;
-import java.util.Base64;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-
-import com.alibaba.fastjson.JSONObject;
-import com.faceplusplus.spring.boot.resp.AgoraResponse;
 import okhttp3.*;
-import org.springframework.beans.BeanUtils;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.faceplusplus.media.RtcTokenBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 /**
  * https://docs.agora.io/cn/Interactive%20Broadcast/rtc_channel_event?platform=RESTful
@@ -39,19 +24,19 @@ public class AgoraTemplate {
 
 	private AgoraUserIdProvider userIdProvider;
 	private AgoraOkHttp3Template agoraOkHttp3Template;
-	private AgoraProperties agoraProperties;
+	private FaceppProperties agoraProperties;
 
-	private final AgoraChannelManagerAsyncOperations channelOps = new AgoraChannelManagerAsyncOperations(this);
+	private final AgoraChannelManagerAsyncOperations facesetOps = new AgoraChannelManagerAsyncOperations(this);
 	private final AgoraCloudRecordingAsyncOperations cloudRecordingOps = new AgoraCloudRecordingAsyncOperations(this);
 
-	public AgoraTemplate(AgoraUserIdProvider userIdProvider, AgoraOkHttp3Template agoraOkHttp3Template, AgoraProperties agoraProperties) {
+	public AgoraTemplate(AgoraUserIdProvider userIdProvider, AgoraOkHttp3Template agoraOkHttp3Template, FaceppProperties agoraProperties) {
 		this.userIdProvider = userIdProvider;
 		this.agoraOkHttp3Template = agoraOkHttp3Template;
 		this.agoraProperties = agoraProperties;
 	}
 
-	public AgoraChannelManagerAsyncOperations opsForChannel() {
-		return channelOps;
+	public AgoraChannelManagerAsyncOperations opsForFaceset() {
+		return facesetOps;
 	}
 
 	public AgoraCloudRecordingAsyncOperations opsForCloudRecording() {
@@ -101,7 +86,7 @@ public class AgoraTemplate {
 		return userIdProvider.getChannelByUserId(agoraProperties.getAppId(), userId);
 	}
 
-	public AgoraProperties getAgoraProperties() {
+	public FaceppProperties getAgoraProperties() {
 		return agoraProperties;
 	}
 

@@ -1,10 +1,6 @@
 package com.faceplusplus.spring.boot;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-
-import com.faceplusplus.spring.boot.resp.ChannelUserStateResponse;
+import com.faceplusplus.spring.boot.resp.FacesetCreateResponse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,11 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.faceplusplus.spring.boot.resp.AcquireResourceResponse;
 import okhttp3.OkHttpClient;
 
-public class AgoraTemplate_Test {
+public class FaceppTemplate_Test {
 
 	ObjectMapper objectMapper = new ObjectMapper();
 	OkHttpClient okhttp3Client = new OkHttpClient.Builder().build();
-	AgoraProperties properties = new AgoraProperties();
+	FaceppProperties properties = new FaceppProperties();
 	AgoraTemplate template;
 
 	@Before
@@ -45,7 +41,7 @@ public class AgoraTemplate_Test {
 	@Test
 	public void testGetChannelUserState() throws Exception {
 
-		ChannelUserStateResponse response =  template.opsForChannel().getChannelUserState("10", "912740950978068480");
+		FacesetCreateResponse response =  template.opsForFaceset().createFaceset(null);
 		System.out.println(objectMapper.writeValueAsString(response));
 
 	}

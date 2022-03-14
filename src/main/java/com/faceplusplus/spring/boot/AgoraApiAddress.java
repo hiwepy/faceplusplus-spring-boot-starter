@@ -3,34 +3,33 @@ package com.faceplusplus.spring.boot;
 import java.text.MessageFormat;
 
 /**
- * https://docs.agora.io/cn/cloud-recording/cloud_recording_api_rest?platform=RESTful
- * https://docs.agora.io/cn/Video/channel_management_overview?platform=RESTful
+ * https://console.faceplusplus.com.cn/documents/268763412
  * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  */
 public enum AgoraApiAddress {
 
-	// ---------------- 云端录制 ------------------
+	// ---------------- 人脸识别相关 ------------------
 
 	/**
 	 * 获取云端录制资源ID
 	 * URL: https://api.agora.io/v1/apps/<yourappid>/cloud_recording/acquire
 	 */
-	ACQUIRE_RESOURCE_ID("获取云端录制资源ID", RequestMethod.POST,"https://api.agora.io/v1/apps/{0}/cloud_recording/acquire"),
+	ACQUIRE_RESOURCE_ID("人脸检测 API", RequestMethod.POST,"/facepp/v3/detect"),
 	/**
 	 * 开始云端录制
 	 * URL: https://api.agora.io/v1/apps/<yourappid>/cloud_recording/resourceid/<resourceid>/mode/<mode>/start
 	 */
-	START_CLOUD_RECORDING("开始云端录制", RequestMethod.POST,"https://api.agora.io/v1/apps/{0}/cloud_recording/resourceid/{1}/mode/{2}/start"),
+	START_CLOUD_RECORDING("人脸分析 API", RequestMethod.POST,"https://api.agora.io/v1/apps/{0}/cloud_recording/resourceid/{1}/mode/{2}/start"),
 	/**
 	 * 更新云端录制
 	 * URL: https://api.agora.io/v1/apps/<appid>/cloud_recording/resourceid/<resourceid>/sid/<sid>/mode/<mode>/updateLayout
 	 */
-	UPDATE_CLOUD_RECORDING("更新云端录制", RequestMethod.POST,"https://api.agora.io/v1/apps/{0}/cloud_recording/resourceid/{1}/sid/{2}/mode/{3}/updateLayout"),
+	UPDATE_CLOUD_RECORDING("稠密关键点 API", RequestMethod.POST,"https://api.agora.io/v1/apps/{0}/cloud_recording/resourceid/{1}/sid/{2}/mode/{3}/updateLayout"),
 	/**
 	 * 更新合流布局
 	 * URL: https://api.agora.io/v1/apps/<appid>/cloud_recording/resourceid/<resourceid>/sid/<sid>/mode/<mode>/update
 	 */
-	UPDATE_CLOUD_RECORDING_LAYOUT("更新合流布局", RequestMethod.POST,"https://api.agora.io/v1/apps/{0}/cloud_recording/resourceid/{1}/sid/{2}/mode/{3}/update"),
+	UPDATE_CLOUD_RECORDING_LAYOUT("人脸比对 API", RequestMethod.POST,"https://api.agora.io/v1/apps/{0}/cloud_recording/resourceid/{1}/sid/{2}/mode/{3}/update"),
 	/**
 	 * 查询云端录制状态
 	 * URL: https://api.agora.io/v1/apps/<yourappid>/cloud_recording/resourceid/<resourceid>/sid/<sid>/mode/<mode>/query
@@ -99,10 +98,10 @@ public enum AgoraApiAddress {
 	// ---------------- 查询在线频道信息 ------------------
 
 	/**
-	 * 查询用户状态
-	 * URL:  https://api.agora.io/v1/channel/user/property/{appid}/{uid}/{channelName}
+	 * 创建人脸库 API
+	 * URL: https://console.faceplusplus.com.cn/documents/4888391
 	 */
-	CHANNEL_USER_STATE("查询用户状态", RequestMethod.GET,"https://api.agora.io/dev/v1/channel/user/property/{0}/{1}/{2}"),
+	FACESET_CREATE("创建人脸库", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/faceset/create"),
 	/**
 	 * 获取用户列表
 	 * URL:  https://api.agora.io/v1/channel/user/{appid}/{channelName}

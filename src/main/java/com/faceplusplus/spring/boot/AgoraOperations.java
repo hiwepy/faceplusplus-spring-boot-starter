@@ -22,6 +22,7 @@ import java.util.function.Consumer;
 
 import com.faceplusplus.spring.boot.resp.AgoraResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -31,14 +32,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AgoraOperations {
 
-	public static final String PREFIX = "https://console.tim.qq.com";
+	public static final String PREFIX = "https://api-cn.faceplusplus.com";
 	public static final String APPLICATION_JSON_VALUE = "application/json";
 	public static final String APPLICATION_JSON_UTF8_VALUE = "application/json;charset=UTF-8";
 
+	protected ObjectMapper objectMapper;
 	protected AgoraTemplate agoraTemplate;
 
-	public AgoraOperations(AgoraTemplate agoraTemplate) {
+	public AgoraOperations(AgoraTemplate agoraTemplate, ObjectMapper objectMapper) {
 		this.agoraTemplate = agoraTemplate;
+		this.objectMapper = objectMapper;
 	}
 
 	/**
@@ -61,7 +64,7 @@ public abstract class AgoraOperations {
 		return agoraTemplate.getChannelByUserId(userId);
 	}
 
-	protected AgoraProperties getAgoraProperties() {
+	protected FaceppProperties getAgoraProperties() {
 		return agoraTemplate.getAgoraProperties();
 	}
 
@@ -99,6 +102,16 @@ public abstract class AgoraOperations {
 		return res;
 	}
 
+	protected <T extends AgoraResponse> T post(AgoraApiAddress address, String url, Map<String, Object> params, Map<String, Object> requestBody, Class<T> cls) throws IOException {
+		T res = getAgoraOkHttp3Template().post(url, null, params,  requestBody, cls);
+		if (Objects.nonNull(res)) {
+			log.info("Agora {} >> Success, url : {}, requestBody : {}, Code : {}, Body : {}", address.getOpt(), url, requestBody, res.getCode());
+		} else {
+			log.error("Agora {} >> Failure, url : {}, requestBody : {}, Code : {}", address.getOpt(), url, requestBody, res.getCode());
+		}
+		return res;
+	}
+
 	protected <T extends AgoraResponse> void asyncPost(AgoraApiAddress address, String url, Map<String, Object> bodyContent, Class<T> cls, Consumer<T> success) throws IOException {
 		getAgoraOkHttp3Template().doAsyncRequest(url, AgoraOkHttp3Template.HttpMethod.POST, null,  null, bodyContent, success, null, cls);
 	}
@@ -107,4 +120,7 @@ public abstract class AgoraOperations {
 		return agoraTemplate;
 	}
 
+	public ObjectMapper getObjectMapper() {
+		return objectMapper;
+	}
 }

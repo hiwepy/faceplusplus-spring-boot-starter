@@ -8,15 +8,17 @@ import lombok.Data;
  * ons 多线程发送配置参数 corePoolSize 线程池核心池的大小 maximumPoolSize 线程池中允许的最大线程数量
  * keepAliveTime 当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间 unit keepAliveTime 的时间单位
  */
-@ConfigurationProperties(prefix = AgoraProperties.PREFIX)
+@ConfigurationProperties(prefix = FaceppProperties.PREFIX)
 @Data
-public class AgoraProperties {
+public class FaceppProperties {
 
 	/**
-	 * The prefix of the property of {@link AgoraProperties}.
+	 * The prefix of the property of {@link FaceppProperties}.
 	 */
-	public static final String PREFIX = "agora";
+	public static final String PREFIX = "faceplusplus.facepp";
 
+	/** appId */
+	private String host = "https://api-cn.faceplusplus.com";
 	/** appId */
 	private String appId;
 	/** 证书 */
