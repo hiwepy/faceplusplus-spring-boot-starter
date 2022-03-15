@@ -25,7 +25,7 @@ public class FaceppTemplate_Test {
 		properties.setLoginKey("");
 		properties.setLoginSecret("");
 		AgoraOkHttp3Template agoraOkHttp3Template = new AgoraOkHttp3Template(okhttp3Client, objectMapper, properties);
-		template = new AgoraTemplate(new AgoraUserIdProvider() {}, agoraOkHttp3Template, properties );
+		template = new AgoraTemplate(agoraOkHttp3Template, properties );
 
 	}
 

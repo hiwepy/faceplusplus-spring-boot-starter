@@ -25,12 +25,10 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -45,8 +43,10 @@ public class AgoraOkHttp3Template implements InitializingBean {
 
 	public final static String APPLICATION_JSON_VALUE = "application/json";
 	public final static String APPLICATION_JSON_UTF8_VALUE = "application/json;charset=UTF-8";
+	public final static String APPLICATION_OCTET_STREAM_VALUE = "application/octet-stream";
 	public final static MediaType APPLICATION_JSON = MediaType.parse(APPLICATION_JSON_VALUE);
 	public final static MediaType APPLICATION_JSON_UTF8 = MediaType.parse(APPLICATION_JSON_UTF8_VALUE);
+	public final static MediaType APPLICATION_OCTET_STREAM = MediaType.parse(APPLICATION_OCTET_STREAM_VALUE);
 
 	protected OkHttpClient okhttp3Client;
 	protected ObjectMapper objectMapper;
@@ -61,7 +61,6 @@ public class AgoraOkHttp3Template implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// 请求编码，默认：UTF-8
-		// String charset = properties.getProperty(HTTP_CHARSET, "UTF-8");
 		if (okhttp3Client == null) {
 			// 1.创建OkHttpClient对象
 			okhttp3Client = new OkHttpClient().newBuilder().connectTimeout(5000, TimeUnit.MILLISECONDS)
@@ -78,17 +77,6 @@ public class AgoraOkHttp3Template implements InitializingBean {
 					// .addInterceptor(headerInterceptor)
 					.build();
 		}
-	}
-
-	/**
-	 * restful请求认证
-	 */
-	private String getAuthorizationHeader() {
-		// 1、拼接客户 ID 和客户密钥并使用 base64 编码
-		String plainCredentials = agoraProperties.getLoginKey() + ":" + agoraProperties.getLoginSecret();
-		String base64Credentials = new String(Base64.getEncoder().encode(plainCredentials.getBytes()));
-		// 2、创建 authorization header
-		return "Basic " + base64Credentials;
 	}
 
 	public <T extends AgoraResponse> T post(String url,  Class<T> rtClass) throws IOException {
@@ -201,16 +189,75 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		return this.doRequest(startTime, httpUrl, method, headers, bodyContent);
 	}
 
+	public <T extends AgoraResponse> T doPartRequest(
+			String httpUrl,
+			Map<String, Object> params,
+			Class<T> rtClass) throws IOException {
+
+		long startTime = System.currentTimeMillis();
+		// 2.创建一个call对象,参数就是Request请求对象
+		Response response = this.doPartRequest(startTime, httpUrl, params);
+		T res = null;
+		try {
+			if (response.isSuccessful()) {
+				String body = response.body().string();
+				res = this.readValue(body, rtClass);
+				res.setCode(response.code());
+			} else {
+				res = BeanUtils.instantiateClass(rtClass);
+				res.setCode(response.code());
+			}
+		} catch (Exception e) {
+			log.error("Agora >> Async Request Error : {}, use time : {}", e.getMessage(), System.currentTimeMillis() - startTime);
+			res = BeanUtils.instantiateClass(rtClass);
+		}
+		return res;
+	}
+
+	public Response doPartRequest(
+			long startTime,
+			String httpUrl,
+			Map<String, Object> params) throws IOException {
+
+		// 1、创建Request.Builder对象
+		Request.Builder builder = new Request.Builder().url(httpUrl);
+		// 2、构建MultipartBody
+		MultipartBody.Builder bodyBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+		for (Map.Entry<String, Object> entry : params.entrySet()){
+			Object val = entry.getValue();
+			if(val instanceof File){
+				File file = (File) val;
+				RequestBody fileBody = RequestBody.create(AgoraOkHttp3Template.APPLICATION_OCTET_STREAM, file);
+				bodyBuilder.addFormDataPart(entry.getKey(), file.getName(), fileBody );
+			} else {
+				bodyBuilder.addFormDataPart(entry.getKey(), Objects.toString(entry.getValue()) );
+			}
+		}
+		// 3.创建一个call对象, 参数就是Request请求对象
+		try {
+			Response response = okhttp3Client.newCall(builder.post(bodyBuilder.build()).build()).execute();
+			if (response.isSuccessful()) {
+				log.info("Agora >> Request Success : code : {}, use time : {} ", response.code(), System.currentTimeMillis() - startTime);
+			} else {
+				log.error("Agora >> Request Failure : code : {}, message : {}, use time : {} ", response.code(), response.message(), System.currentTimeMillis() - startTime);
+			}
+			return response;
+		} catch (IOException e) {
+			log.error("OkHttp3 Request Error : {}, use time : {}", e.getMessage(), System.currentTimeMillis() - startTime);
+		}
+		return null;
+	}
+
 	public Response doRequest(
 			long startTime,
 			HttpUrl httpUrl,
 			HttpMethod method,
 			Map<String, Object> headers,
 			Map<String, Object> bodyContent) throws IOException {
-		// 1、创建Request.Builder对象
-		Request.Builder builder = this.createRequestBuilder(httpUrl, method, headers, bodyContent);
-		// 2.创建一个call对象, 参数就是Request请求对象
 		try {
+			// 1、创建Request.Builder对象
+			Request.Builder builder = this.createRequestBuilder(httpUrl, method, headers, bodyContent);
+			// 2.创建一个call对象, 参数就是Request请求对象
 			Response response = okhttp3Client.newCall(builder.build()).execute();
 			if (response.isSuccessful()) {
 				log.info("Agora >> Request Success : code : {}, use time : {} ", response.code(), System.currentTimeMillis() - startTime);
@@ -218,10 +265,10 @@ public class AgoraOkHttp3Template implements InitializingBean {
 				log.error("Agora >> Request Failure : code : {}, message : {}, use time : {} ", response.code(), response.message(), System.currentTimeMillis() - startTime);
 			}
 			return response;
-		} catch (Exception e) {
+		} catch (IOException e) {
 			log.error("OkHttp3 Request Error : {}, use time : {}", e.getMessage(), System.currentTimeMillis() - startTime);
+			throw e;
 		}
-		return null;
 	}
 
 	public <T extends AgoraResponse> void doAsyncRequest(
@@ -382,10 +429,6 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		// 1、创建Request.Builder对象
 		Request.Builder builder = new Request.Builder().url(httpUrl);
 		// 2、添加请求头
-		String authorizationHeader = getAuthorizationHeader();
-		log.info("Agora >> Request Authorization : {}", authorizationHeader);
-		builder = builder.header("Authorization", authorizationHeader)
-				.header("Content-Type", APPLICATION_JSON_VALUE);
 		if(Objects.nonNull(headers)) {
 			log.info("Agora >> Request Headers : {}", headers);
 			for (Entry<String, Object> entry : headers.entrySet()) {

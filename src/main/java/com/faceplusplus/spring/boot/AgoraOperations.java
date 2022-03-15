@@ -24,6 +24,8 @@ import com.faceplusplus.spring.boot.resp.AgoraResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.Response;
+import org.springframework.beans.BeanUtils;
 
 /**
  * Tim 接口集成
@@ -31,10 +33,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class AgoraOperations {
-
-	public static final String PREFIX = "https://api-cn.faceplusplus.com";
-	public static final String APPLICATION_JSON_VALUE = "application/json";
-	public static final String APPLICATION_JSON_UTF8_VALUE = "application/json;charset=UTF-8";
 
 	protected ObjectMapper objectMapper;
 	protected AgoraTemplate agoraTemplate;
@@ -44,80 +42,12 @@ public abstract class AgoraOperations {
 		this.objectMapper = objectMapper;
 	}
 
-	/**
-	 * 根据Agora频道名称获取用户id
-	 *
-	 * @param channel Agora频道名称
-	 * @return 从Agora频道名称解析出来的用户ID
-	 */
-	protected String getUserIdByChannel(String channel) {
-		return agoraTemplate.getUserIdByChannel(channel);
-	}
-
-	/**
-	 * 根据用户id获取Agora频道名称
-	 *
-	 * @param userId 用户ID
-	 * @return 用户ID生成的Agora频道名称
-	 */
-	protected String getChannelByUserId(String userId) {
-		return agoraTemplate.getChannelByUserId(userId);
-	}
-
 	protected FaceppProperties getAgoraProperties() {
 		return agoraTemplate.getAgoraProperties();
 	}
 
 	protected AgoraOkHttp3Template getAgoraOkHttp3Template(){
 		return agoraTemplate.getAgoraOkHttp3Template();
-	}
-
-	protected <T extends AgoraResponse> T get(AgoraApiAddress address, String url, Class<T> cls) throws IOException {
-		T res = getAgoraOkHttp3Template().get(url, cls);
-		if (Objects.nonNull(res)) {
-			log.info("Agora {} >> Success, url : {}, Code : {}, Body : {}", address.getOpt(), url, res.getCode());
-		} else {
-			log.error("Agora {} >> Failure, url : {}, Code : {}", address.getOpt(), url, res.getCode());
-		}
-		return res;
-	}
-
-	protected <T extends AgoraResponse> T post(AgoraApiAddress address, String url, Class<T> cls) throws IOException {
-		T res = getAgoraOkHttp3Template().post(url, cls);
-		if (Objects.nonNull(res)) {
-			log.info("Agora {} >> Success, url : {}, Code : {}, Body : {}", address.getOpt(), url, res.getCode());
-		} else {
-			log.error("Agora {} >> Failure, url : {}, Code : {}", address.getOpt(), url, res.getCode());
-		}
-		return res;
-	}
-
-	protected <T extends AgoraResponse> T post(AgoraApiAddress address, String url, Map<String, Object> requestBody, Class<T> cls) throws IOException {
-		T res = getAgoraOkHttp3Template().post(url, null, null , requestBody, cls);
-		if (Objects.nonNull(res)) {
-			log.info("Agora {} >> Success, url : {}, requestBody : {}, Code : {}, Body : {}", address.getOpt(), url, requestBody, res.getCode());
-		} else {
-			log.error("Agora {} >> Failure, url : {}, requestBody : {}, Code : {}", address.getOpt(), url, requestBody, res.getCode());
-		}
-		return res;
-	}
-
-	protected <T extends AgoraResponse> T post(AgoraApiAddress address, String url, Map<String, Object> params, Map<String, Object> requestBody, Class<T> cls) throws IOException {
-		T res = getAgoraOkHttp3Template().post(url, null, params,  requestBody, cls);
-		if (Objects.nonNull(res)) {
-			log.info("Agora {} >> Success, url : {}, requestBody : {}, Code : {}, Body : {}", address.getOpt(), url, requestBody, res.getCode());
-		} else {
-			log.error("Agora {} >> Failure, url : {}, requestBody : {}, Code : {}", address.getOpt(), url, requestBody, res.getCode());
-		}
-		return res;
-	}
-
-	protected <T extends AgoraResponse> void asyncPost(AgoraApiAddress address, String url, Map<String, Object> bodyContent, Class<T> cls, Consumer<T> success) throws IOException {
-		getAgoraOkHttp3Template().doAsyncRequest(url, AgoraOkHttp3Template.HttpMethod.POST, null,  null, bodyContent, success, null, cls);
-	}
-
-	public AgoraTemplate getAgoraTemplate() {
-		return agoraTemplate;
 	}
 
 	public ObjectMapper getObjectMapper() {

@@ -38,12 +38,9 @@ public class AgoraAutoConfiguration {
 	}
 
 	@Bean
-	public AgoraTemplate agoraTemplate(ObjectProvider<AgoraUserIdProvider> agoraUserIdProvider,
-									   AgoraOkHttp3Template agoraOkHttp3Template,
+	public AgoraTemplate agoraTemplate(AgoraOkHttp3Template agoraOkHttp3Template,
 									   FaceppProperties poolProperties) {
-		return new AgoraTemplate(agoraUserIdProvider.getIfAvailable(() -> {
-			return new AgoraUserIdProvider() {};
-		}), agoraOkHttp3Template, poolProperties );
+		return new AgoraTemplate(agoraOkHttp3Template, poolProperties );
 	}
 
 }

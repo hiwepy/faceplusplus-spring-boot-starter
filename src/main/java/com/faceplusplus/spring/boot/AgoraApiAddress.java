@@ -95,7 +95,7 @@ public enum AgoraApiAddress {
 	 */
 	KICKING_RULE_DELETE("删除封禁用户权限规则", RequestMethod.POST,"https://api.agora.io/v1/kicking-rule"),
 
-	// ---------------- 查询在线频道信息 ------------------
+	// ---------------- 人脸库管理 API 组 ------------------
 
 	/**
 	 * 创建人脸库 API
@@ -113,6 +113,23 @@ public enum AgoraApiAddress {
 	 */
 	CHANNEL_LIST("分页查询项目的频道列表", RequestMethod.GET,"https://api.agora.io/dev/v1/channel/{0}"),
 
+	// ---------------- 人脸识别 API 组 ------------------
+
+	/**
+	 * 人脸检测 API
+	 * URL: https://console.faceplusplus.com.cn/documents/4888373
+	 */
+	FACE_DETECT("人脸检测", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/detect"),
+	/**
+	 * 获取用户列表
+	 * URL:  https://api.agora.io/v1/channel/user/{appid}/{channelName}
+	 */
+	CHANNEL_USER_LIST("获取用户列表", RequestMethod.GET,"https://api.agora.io/dev/v1/channel/user/{0}/{1}"),
+	/**
+	 * 分页查询项目的频道列表
+	 * URL:  https://api.agora.io/v1/channel/{appid}
+	 */
+	CHANNEL_LIST("分页查询项目的频道列表", RequestMethod.GET,"https://api.agora.io/dev/v1/channel/{0}"),
 	 ;
 
 	private String opt;

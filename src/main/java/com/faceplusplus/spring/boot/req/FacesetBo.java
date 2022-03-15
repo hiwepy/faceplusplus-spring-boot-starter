@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * 录制文件设置
+ * 人脸集合库
  */
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @Data
