@@ -18,9 +18,9 @@ import okhttp3.OkHttpClient;
 public class AgoraAutoConfiguration {
 
 	@Bean
-	public AgoraOkHttp3Template agoraOkHttp3Template(ObjectProvider<OkHttpClient> okhttp3ClientProvider,
-													 ObjectProvider<ObjectMapper> objectMapperProvider,
-													 FaceppProperties poolProperties) {
+	public FaceppOkHttp3Template agoraOkHttp3Template(ObjectProvider<OkHttpClient> okhttp3ClientProvider,
+													  ObjectProvider<ObjectMapper> objectMapperProvider,
+													  FaceppProperties poolProperties) {
 
 		OkHttpClient okhttp3Client = okhttp3ClientProvider.getIfAvailable(() -> new OkHttpClient.Builder().build());
 
@@ -34,13 +34,13 @@ public class AgoraAutoConfiguration {
 			return objectMapperDef;
 		});
 
-		return new AgoraOkHttp3Template(okhttp3Client, objectMapper, poolProperties);
+		return new FaceppOkHttp3Template(okhttp3Client, objectMapper, poolProperties);
 	}
 
 	@Bean
-	public AgoraTemplate agoraTemplate(AgoraOkHttp3Template agoraOkHttp3Template,
-									   FaceppProperties poolProperties) {
-		return new AgoraTemplate(agoraOkHttp3Template, poolProperties );
+	public FaceppTemplate agoraTemplate(FaceppOkHttp3Template faceppOkHttp3Template,
+										FaceppProperties poolProperties) {
+		return new FaceppTemplate(faceppOkHttp3Template, poolProperties );
 	}
 
 }

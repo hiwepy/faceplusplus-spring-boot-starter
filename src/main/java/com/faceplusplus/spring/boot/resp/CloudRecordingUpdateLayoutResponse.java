@@ -26,7 +26,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class CloudRecordingUpdateLayoutResponse extends AgoraResponse {
+public class CloudRecordingUpdateLayoutResponse extends FaceppResponse {
 
 	/**
 	 * 响应体

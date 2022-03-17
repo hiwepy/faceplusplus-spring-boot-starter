@@ -17,7 +17,7 @@ package com.faceplusplus.spring.boot;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.faceplusplus.spring.boot.resp.AgoraResponse;
+import com.faceplusplus.spring.boot.resp.FaceppResponse;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.beans.BeanUtils;
@@ -39,7 +39,7 @@ import java.util.function.Consumer;
  * @author ： <a href="https://github.com/hiwepy">wandl</a>
  */
 @Slf4j
-public class AgoraOkHttp3Template implements InitializingBean {
+public class FaceppOkHttp3Template implements InitializingBean {
 
 	public final static String APPLICATION_JSON_VALUE = "application/json";
 	public final static String APPLICATION_JSON_UTF8_VALUE = "application/json;charset=UTF-8";
@@ -52,7 +52,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 	protected ObjectMapper objectMapper;
 	protected FaceppProperties agoraProperties;
 
-	public AgoraOkHttp3Template(OkHttpClient okhttp3Client, ObjectMapper objectMapper, FaceppProperties agoraProperties) {
+	public FaceppOkHttp3Template(OkHttpClient okhttp3Client, ObjectMapper objectMapper, FaceppProperties agoraProperties) {
 		this.okhttp3Client = okhttp3Client;
 		this.objectMapper = objectMapper;
 		this.agoraProperties = agoraProperties;
@@ -79,35 +79,35 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		}
 	}
 
-	public <T extends AgoraResponse> T post(String url,  Class<T> rtClass) throws IOException {
+	public <T extends FaceppResponse> T post(String url, Class<T> rtClass) throws IOException {
 		return this.doRequest(url, HttpMethod.POST, null, null, null, rtClass);
 	}
 
-	public <T extends AgoraResponse> T post(String url, Map<String, Object> params, Class<T> rtClass) throws IOException {
+	public <T extends FaceppResponse> T post(String url, Map<String, Object> params, Class<T> rtClass) throws IOException {
 		return this.doRequest(url, HttpMethod.POST, null, params, null, rtClass);
 	}
 
-	public <T extends AgoraResponse> T post(String url, Map<String, Object> headers, Map<String, Object> params, Class<T> rtClass) throws IOException {
+	public <T extends FaceppResponse> T post(String url, Map<String, Object> headers, Map<String, Object> params, Class<T> rtClass) throws IOException {
 		return this.doRequest(url, HttpMethod.POST, headers, params, null, rtClass);
 	}
 
-	public <T extends AgoraResponse> T post(String url, Map<String, Object> headers, Map<String, Object> params, Map<String, Object> bodyContent, Class<T> rtClass) throws IOException {
+	public <T extends FaceppResponse> T post(String url, Map<String, Object> headers, Map<String, Object> params, Map<String, Object> bodyContent, Class<T> rtClass) throws IOException {
 		return this.doRequest(url, HttpMethod.POST, headers, params, bodyContent, rtClass);
 	}
 
-	public <T extends AgoraResponse> T get(String url, Class<T> rtClass) throws IOException {
+	public <T extends FaceppResponse> T get(String url, Class<T> rtClass) throws IOException {
 		return this.doRequest(url, HttpMethod.GET, null, null, null, rtClass);
 	}
 
-	public <T extends AgoraResponse> T get(String url, Map<String, Object> params, Class<T> rtClass) throws IOException {
+	public <T extends FaceppResponse> T get(String url, Map<String, Object> params, Class<T> rtClass) throws IOException {
 		return this.doRequest(url, HttpMethod.GET, null, params, null, rtClass);
 	}
 
-	public <T extends AgoraResponse> T get(String url, Map<String, Object> headers, Map<String, Object> params, Class<T> rtClass) throws IOException {
+	public <T extends FaceppResponse> T get(String url, Map<String, Object> headers, Map<String, Object> params, Class<T> rtClass) throws IOException {
 		return this.doRequest(url, HttpMethod.GET, headers, params, null, rtClass);
 	}
 
-	public <T extends AgoraResponse> T doRequest(
+	public <T extends FaceppResponse> T doRequest(
 			String url,
 			HttpMethod method,
 			Map<String, Object> headers,
@@ -120,7 +120,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		return this.doRequest(startTime, httpUrl, method, headers, bodyContent, rtClass);
 	}
 
-	public <T extends AgoraResponse> T doRequest(
+	public <T extends FaceppResponse> T doRequest(
 			long startTime,
 			HttpUrl httpUrl,
 			HttpMethod method,
@@ -189,7 +189,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		return this.doRequest(startTime, httpUrl, method, headers, bodyContent);
 	}
 
-	public <T extends AgoraResponse> T doPartRequest(
+	public <T extends FaceppResponse> T doPartRequest(
 			String httpUrl,
 			Map<String, Object> params,
 			Class<T> rtClass) throws IOException {
@@ -227,7 +227,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 			Object val = entry.getValue();
 			if(val instanceof File){
 				File file = (File) val;
-				RequestBody fileBody = RequestBody.create(AgoraOkHttp3Template.APPLICATION_OCTET_STREAM, file);
+				RequestBody fileBody = RequestBody.create(FaceppOkHttp3Template.APPLICATION_OCTET_STREAM, file);
 				bodyBuilder.addFormDataPart(entry.getKey(), file.getName(), fileBody );
 			} else {
 				bodyBuilder.addFormDataPart(entry.getKey(), Objects.toString(entry.getValue()) );
@@ -271,7 +271,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		}
 	}
 
-	public <T extends AgoraResponse> void doAsyncRequest(
+	public <T extends FaceppResponse> void doAsyncRequest(
 			String url,
 			HttpMethod method,
 			Consumer<T> success,
@@ -279,7 +279,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		this.doAsyncRequest(url, method, success, null, rtClass);
 	}
 
-	public <T extends AgoraResponse> void doAsyncRequest(
+	public <T extends FaceppResponse> void doAsyncRequest(
 			String url,
 			HttpMethod method,
 			Consumer<T> success,
@@ -288,7 +288,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		this.doAsyncRequest(url, method, null, success, failure, rtClass);
 	}
 
-	public <T extends AgoraResponse> void doAsyncRequest(
+	public <T extends FaceppResponse> void doAsyncRequest(
 			String url,
 			HttpMethod method,
 			Map<String, Object> queryParams,
@@ -298,7 +298,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		this.doAsyncRequest(url, method, null, queryParams, success, failure, rtClass);
 	}
 
-	public <T extends AgoraResponse> void doAsyncRequest(
+	public <T extends FaceppResponse> void doAsyncRequest(
 			String url,
 			HttpMethod method,
 			Map<String, Object> headers,
@@ -309,7 +309,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		this.doAsyncRequest(url, method, headers, queryParams, null, success, failure, rtClass);
 	}
 
-	public <T extends AgoraResponse> void doAsyncRequest(
+	public <T extends FaceppResponse> void doAsyncRequest(
 			String url,
 			HttpMethod method,
 			Map<String, Object> headers,
@@ -324,7 +324,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		this.doAsyncRequest(startTime, httpUrl, method, headers, bodyContent, success, failure, rtClass);
 	}
 
-	public <T extends AgoraResponse> void doAsyncRequest(
+	public <T extends FaceppResponse> void doAsyncRequest(
 			long startTime,
 			HttpUrl httpUrl,
 			HttpMethod method,
@@ -354,7 +354,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		}, failure);
 	}
 
-	public <T extends AgoraResponse> void doAsyncRequest(
+	public <T extends FaceppResponse> void doAsyncRequest(
 			long startTime,
 			String url,
 			HttpMethod method,
@@ -368,7 +368,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		this.doAsyncRequest(startTime, httpUrl, method, headers, bodyContent, success, failure);
 	}
 
-	public <T extends AgoraResponse> void doAsyncRequest(
+	public <T extends FaceppResponse> void doAsyncRequest(
 			long startTime,
 			HttpUrl httpUrl,
 			HttpMethod method,
@@ -446,7 +446,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 		return builder;
 	}
 
-	public <T extends AgoraResponse> T readValue(String json, Class<T> cls) {
+	public <T extends FaceppResponse> T readValue(String json, Class<T> cls) {
 		try {
 			return JSONObject.parseObject(json, cls);
 			//return objectMapper.readValue(json, cls);
@@ -538,5 +538,7 @@ public class AgoraOkHttp3Template implements InitializingBean {
 
 	}
 
-
+	public ObjectMapper getObjectMapper() {
+		return objectMapper;
+	}
 }

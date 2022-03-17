@@ -27,7 +27,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class ChannelUserListResponse extends AgoraResponse {
+public class ChannelUserListResponse extends FaceppResponse {
 
 	/**
 	 * 响应体

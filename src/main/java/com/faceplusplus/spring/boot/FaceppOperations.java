@@ -15,42 +15,31 @@
  */
 package com.faceplusplus.spring.boot;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Consumer;
-
-import com.faceplusplus.spring.boot.resp.AgoraResponse;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.Response;
-import org.springframework.beans.BeanUtils;
 
 /**
  * Tim 接口集成
  * https://cloud.tencent.com/document/product/269/42440
  */
 @Slf4j
-public abstract class AgoraOperations {
+public abstract class FaceppOperations {
 
-	protected ObjectMapper objectMapper;
-	protected AgoraTemplate agoraTemplate;
+	protected FaceppTemplate faceppTemplate;
 
-	public AgoraOperations(AgoraTemplate agoraTemplate, ObjectMapper objectMapper) {
-		this.agoraTemplate = agoraTemplate;
-		this.objectMapper = objectMapper;
+	public FaceppOperations(FaceppTemplate faceppTemplate) {
+		this.faceppTemplate = faceppTemplate;
 	}
 
-	protected FaceppProperties getAgoraProperties() {
-		return agoraTemplate.getAgoraProperties();
+	protected FaceppProperties getFaceppProperties() {
+		return faceppTemplate.getFaceppProperties();
 	}
 
-	protected AgoraOkHttp3Template getAgoraOkHttp3Template(){
-		return agoraTemplate.getAgoraOkHttp3Template();
+	protected FaceppOkHttp3Template getFaceppOkHttp3Template(){
+		return faceppTemplate.getFaceppOkHttp3Template();
 	}
 
-	public ObjectMapper getObjectMapper() {
-		return objectMapper;
+	protected ObjectMapper getObjectMapper(){
+		return faceppTemplate.getFaceppOkHttp3Template().getObjectMapper();
 	}
 }

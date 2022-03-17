@@ -3,7 +3,7 @@ package com.faceplusplus.spring.boot;
 /**
  * 声网相关的常量
  */
-public interface AgoraConstant {
+public interface FaceppConstant {
 
     // 获取频道内的所有用户
     // https://api.agora.io/dev/v1/channel/user/{appid}/{channelName}

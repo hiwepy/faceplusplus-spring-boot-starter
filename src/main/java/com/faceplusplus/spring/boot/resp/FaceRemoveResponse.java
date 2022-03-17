@@ -27,7 +27,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class FaceDetectResponse extends FaceppResponse {
+public class FaceRemoveResponse extends FaceppResponse {
 
 	/**
 	 * 1、FaceSet 的标识
@@ -42,10 +42,10 @@ public class FaceDetectResponse extends FaceppResponse {
 	private String outerId;
 
 	/**
-	 * 3、本次操作成功加入 FaceSet的face_token 数量
+	 * 3、成功从FaceSet中移除的face_token数量
 	 */
-	@JsonProperty("face_added")
-	private Integer faceAdded;
+	@JsonProperty("face_removed")
+	private Integer faceRemoved;
 
 	/**
 	 * 4、操作结束后 FaceSet 中的 face_token 总数量
@@ -54,12 +54,12 @@ public class FaceDetectResponse extends FaceppResponse {
 	private Integer faceCount;
 
 	/**
-	 * 5、无法被加入 FaceSet 的 face_token 以及原因
+	 * 5、无法从FaceSet中移除的face_token以及原因
 	 * face_token：人脸标识
-	 * reason：不能被添加的原因，包括 INVALID_FACE_TOKEN 人脸表示不存在 ，QUOTA_EXCEEDED 已达到 FaceSet 存储上限
+	 * reason：不能被移除的原因，包括 INVALID_FACE_TOKEN 人脸标识不存在
 	 */
 	@JsonProperty("failure_detail")
-	private List<FailureFetail> detail;
+	private List<FaceAddResponse.FailureFetail> detail;
 
 	@Data
 	@JsonInclude(JsonInclude.Include.NON_NULL)

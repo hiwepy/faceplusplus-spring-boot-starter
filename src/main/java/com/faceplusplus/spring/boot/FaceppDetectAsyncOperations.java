@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, vindell (https://github.com/vindell).
+ * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,14 +15,12 @@
  */
 package com.faceplusplus.spring.boot;
 
-public interface AgoraUserIdProvider {
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-	default String getUserIdByChannel(String appid, String channel)  {
-		return channel;
-	}
-	
-	default String getChannelByUserId(String appid, String userId) {
-		return userId;
+public class FaceppDetectAsyncOperations extends FaceppDetectOperations {
+
+	public FaceppDetectAsyncOperations(FaceppTemplate faceppTemplate) {
+		super(faceppTemplate);
 	}
 
 }

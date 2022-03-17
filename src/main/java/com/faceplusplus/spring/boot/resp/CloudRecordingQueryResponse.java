@@ -26,7 +26,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class CloudRecordingQueryResponse extends AgoraResponse {
+public class CloudRecordingQueryResponse extends FaceppResponse {
 
 	/**
 	 * 1、录制 ID。成功开始云端录制后，你会得到一个 sid （录制 ID)。该 ID 是一次录制周期的唯一标识

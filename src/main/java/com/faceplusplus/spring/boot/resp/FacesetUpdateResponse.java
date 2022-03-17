@@ -18,7 +18,6 @@ package com.faceplusplus.spring.boot.resp;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,18 +25,18 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class CloudRecordingUpdateResponse extends FaceppResponse {
+public class FacesetUpdateResponse extends FaceppResponse {
 
 	/**
-	 * 1、录制 ID。成功开始云端录制后，你会得到一个 sid （录制 ID)。该 ID 是一次录制周期的唯一标识
+	 * 1、FaceSet 的标识
 	 */
-	@JsonProperty("sid")
-	private String sid;
+	@JsonProperty("faceset_token")
+	private String facesetToken;
 
 	/**
-	 * 2、云端录制使用的 resource ID
+	 * 2、用户自定义的 FaceSet 标识，如果未定义则返回值为空
 	 */
-	@JsonProperty("resourceId")
-	private String resourceId;
+	@JsonProperty("outer_id")
+	private String outerId;
 
 }

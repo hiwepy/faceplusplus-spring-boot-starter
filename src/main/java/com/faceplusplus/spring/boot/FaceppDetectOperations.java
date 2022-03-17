@@ -16,31 +16,23 @@
 package com.faceplusplus.spring.boot;
 
 import com.faceplusplus.spring.boot.req.FaceDetectOptions;
-import com.faceplusplus.spring.boot.req.FacesetBo;
 import com.faceplusplus.spring.boot.resp.ChannelUserListResponse;
 import com.faceplusplus.spring.boot.resp.FaceDetectResponse;
-import com.faceplusplus.spring.boot.resp.FacesetCreateResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
-import okhttp3.MultipartBody;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import org.springframework.beans.BeanUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * 1、人脸库管理相关接口
  * https://docs.agora.io/cn/Video/channel_management_overview?platform=RESTful
  */
-public class FaceDetectOperations extends AgoraOperations {
+public class FaceppDetectOperations extends FaceppOperations {
 
-	public FaceDetectOperations(AgoraTemplate agoraTemplate, ObjectMapper objectMapper) {
-		super(agoraTemplate, objectMapper);
+	public FaceppDetectOperations(FaceppTemplate faceppTemplate) {
+		super(faceppTemplate);
 	}
 
 	/**
@@ -56,12 +48,12 @@ public class FaceDetectOperations extends AgoraOperations {
 	public FaceDetectResponse detectUrl(String imageUrl, FaceDetectOptions options) throws IOException {
 		String reqUrl = AgoraApiAddress.FACE_DETECT.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
-				.put("api_key", getAgoraProperties().getAppId())
-				.put("api_secret", getAgoraProperties().getAppCertificate())
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
 				.put("image_url", imageUrl)
 				.putAll(getObjectMapper().readValue(getObjectMapper().writeValueAsString(options), Map.class))
 				.build();
-		FaceDetectResponse resp = getAgoraOkHttp3Template().post(reqUrl, null, params, FaceDetectResponse.class);
+		FaceDetectResponse resp = getFaceppOkHttp3Template().post(reqUrl, null, params, FaceDetectResponse.class);
 		return resp;
 	}
 
@@ -78,12 +70,12 @@ public class FaceDetectOperations extends AgoraOperations {
 	public FaceDetectResponse detectBase64(String imageBase64, FaceDetectOptions options) throws IOException {
 		String reqUrl = AgoraApiAddress.FACE_DETECT.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
-				.put("api_key", getAgoraProperties().getAppId())
-				.put("api_secret", getAgoraProperties().getAppCertificate())
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
 				.put("image_base64", imageBase64)
 				.putAll(getObjectMapper().readValue(getObjectMapper().writeValueAsString(options), Map.class))
 				.build();
-		FaceDetectResponse resp = getAgoraOkHttp3Template().post(reqUrl, null, params, FaceDetectResponse.class);
+		FaceDetectResponse resp = getFaceppOkHttp3Template().post(reqUrl, null, params, FaceDetectResponse.class);
 		return resp;
 	}
 
@@ -100,12 +92,12 @@ public class FaceDetectOperations extends AgoraOperations {
 	public FaceDetectResponse detectFile(File imageFile, FaceDetectOptions options) throws IOException {
 		String reqUrl = AgoraApiAddress.FACE_DETECT.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
-				.put("api_key", getAgoraProperties().getAppId())
-				.put("api_secret", getAgoraProperties().getAppCertificate())
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
 				.put("image_file", imageFile)
 				.putAll(getObjectMapper().readValue(getObjectMapper().writeValueAsString(options), Map.class))
 				.build();
-		FaceDetectResponse resp = getAgoraOkHttp3Template().doPartRequest(reqUrl, params, FaceDetectResponse.class);
+		FaceDetectResponse resp = getFaceppOkHttp3Template().doPartRequest(reqUrl, params, FaceDetectResponse.class);
 		return resp;
 	}
 
@@ -119,8 +111,8 @@ public class FaceDetectOperations extends AgoraOperations {
 	 * @return 操作结果
 	 */
 	public ChannelUserListResponse getChannelUserList(String channelName) throws IOException {
-		String reqUrl = AgoraApiAddress.CHANNEL_USER_LIST.getUrl(getAgoraProperties().getAppId(), channelName);
-		ChannelUserListResponse resp = getAgoraOkHttp3Template().get(reqUrl, ChannelUserListResponse.class);
+		String reqUrl = AgoraApiAddress.CHANNEL_USER_LIST.getUrl(getFaceppProperties().getAppId(), channelName);
+		ChannelUserListResponse resp = getFaceppOkHttp3Template().get(reqUrl, ChannelUserListResponse.class);
 		return resp;
 	}
 
@@ -134,8 +126,8 @@ public class FaceDetectOperations extends AgoraOperations {
 	 * @return 操作结果
 	 */
 	public ChannelUserListResponse getChannelList(Integer pageNo, Integer pageSize) throws IOException {
-		String reqUrl = AgoraApiAddress.CHANNEL_LIST.getUrl(getAgoraProperties().getAppId());
-		ChannelUserListResponse resp = getAgoraOkHttp3Template().get(reqUrl, ChannelUserListResponse.class);
+		String reqUrl = AgoraApiAddress.CHANNEL_LIST.getUrl(getFaceppProperties().getAppId());
+		ChannelUserListResponse resp = getFaceppOkHttp3Template().get(reqUrl, ChannelUserListResponse.class);
 		return resp;
 	}
 

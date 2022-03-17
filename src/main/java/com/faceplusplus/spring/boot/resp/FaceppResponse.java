@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class AgoraResponse {
+public class FaceppResponse {
 
 	/**
 	 * 响应状态码，200表示成功，非200表示失败

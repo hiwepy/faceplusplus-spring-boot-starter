@@ -15,7 +15,7 @@ public class FaceppTemplate_Test {
 	ObjectMapper objectMapper = new ObjectMapper();
 	OkHttpClient okhttp3Client = new OkHttpClient.Builder().build();
 	FaceppProperties properties = new FaceppProperties();
-	AgoraTemplate template;
+	FaceppTemplate template;
 
 	@Before
 	public void setup() {
@@ -24,8 +24,8 @@ public class FaceppTemplate_Test {
 		properties.setAppCertificate("");
 		properties.setLoginKey("");
 		properties.setLoginSecret("");
-		AgoraOkHttp3Template agoraOkHttp3Template = new AgoraOkHttp3Template(okhttp3Client, objectMapper, properties);
-		template = new AgoraTemplate(agoraOkHttp3Template, properties );
+		FaceppOkHttp3Template faceppOkHttp3Template = new FaceppOkHttp3Template(okhttp3Client, objectMapper, properties);
+		template = new FaceppTemplate(faceppOkHttp3Template, properties );
 
 	}
 

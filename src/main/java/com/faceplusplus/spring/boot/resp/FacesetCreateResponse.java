@@ -27,7 +27,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class FacesetCreateResponse extends AgoraResponse {
+public class FacesetCreateResponse extends FaceppResponse {
 
 	/**
 	 * 1、FaceSet 的标识
