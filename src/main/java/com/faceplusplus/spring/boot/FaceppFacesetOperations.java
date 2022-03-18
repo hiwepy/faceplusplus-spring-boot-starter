@@ -31,7 +31,6 @@ import java.util.stream.Stream;
 
 /**
  * 1、人脸库管理相关接口
- * https://docs.agora.io/cn/Video/channel_management_overview?platform=RESTful
  */
 public class FaceppFacesetOperations extends FaceppOperations {
 
@@ -220,7 +219,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceRemoveResponse removeFaceByToken(String facesetToken, String ... faceTokens) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD.getUrl();
+		String reqUrl = AgoraApiAddress.FACE_REMOVE.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -241,7 +240,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceRemoveResponse removeFaceByOuterId(String outerId, String ... faceTokens) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD.getUrl();
+		String reqUrl = AgoraApiAddress.FACE_REMOVE.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -251,5 +250,44 @@ public class FaceppFacesetOperations extends FaceppOperations {
 		FaceRemoveResponse resp = getFaceppOkHttp3Template().post(reqUrl, null, params,  FaceRemoveResponse.class);
 		return resp;
 	}
+
+	/**
+	 * 1、人脸库中的人脸管理 > 自定义人脸信息 API
+	 * 为检测出的某一个人脸添加标识信息，该信息会在Search接口结果中返回，用来确定用户身份。
+	 * API：https://console.faceplusplus.com.cn/documents/4888387
+	 * @param faceToken 人脸标识face_token
+	 * @param userId 用户自定义的user_id，不超过255个字符，不能包括^@,&=*'"；建议将同一个人的多个face_token设置同样的user_id
+	 * @return 操作结果
+	 */
+	public FaceSetUserIdResponse createFace(String faceToken, String userId) throws IOException {
+		String reqUrl = AgoraApiAddress.FACE_SET_USERID.getUrl();
+		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
+				.put("user_id", userId)
+				.put("face_token", faceToken)
+				.build();
+		FaceSetUserIdResponse resp = getFaceppOkHttp3Template().post(reqUrl, null, params, FaceSetUserIdResponse.class);
+		return resp;
+	}
+
+	/**
+	 * 2、人脸库中的人脸管理 > 获取人脸信息 API
+	 * 通过传入在Detect API检测出的人脸标识face_token，获取一个人脸的关联信息，包括源图片ID、归属的FaceSet。
+	 * API：https://console.faceplusplus.com.cn/documents/4888385
+	 * @param faceToken 人脸标识face_token
+	 * @return 操作结果
+	 */
+	public FaceDetailResponse getFaceDetail(String faceToken) throws IOException {
+		String reqUrl = AgoraApiAddress.FACE_GET_DETAIL.getUrl();
+		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
+				.put("face_token", faceToken)
+				.build();
+		FaceDetailResponse resp = getFaceppOkHttp3Template().post(reqUrl, null, params,  FaceDetailResponse.class);
+		return resp;
+	}
+
 
 }

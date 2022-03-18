@@ -29,7 +29,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class FaceDetectResponse extends FaceppResponse {
+public class FaceAnalyzeResponse extends FaceppResponse {
 
 	/**
 	 * 1、被检测的图片在系统中的标识

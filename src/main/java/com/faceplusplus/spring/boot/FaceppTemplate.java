@@ -13,7 +13,7 @@ public class FaceppTemplate {
 	private FaceppProperties faceppProperties;
 
 	private final FaceppFacesetAsyncOperations facesetOps = new FaceppFacesetAsyncOperations(this);
-	private final FaceppDetectAsyncOperations faceDetectOps = new FaceppDetectAsyncOperations(this);
+	private final FaceppFaceAsyncOperations faceDetectOps = new FaceppFaceAsyncOperations(this);
 	private final FaceppCloudRecordingAsyncOperations cloudRecordingOps = new FaceppCloudRecordingAsyncOperations(this);
 
 
@@ -27,7 +27,7 @@ public class FaceppTemplate {
 		return facesetOps;
 	}
 
-	public FaceppDetectAsyncOperations opsForFaceDetect() {
+	public FaceppFaceAsyncOperations opsForFaceDetect() {
 		return faceDetectOps;
 	}
 	public FaceppCloudRecordingAsyncOperations opsForCloudRecording() {

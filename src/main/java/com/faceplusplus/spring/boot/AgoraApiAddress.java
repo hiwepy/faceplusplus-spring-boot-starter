@@ -124,7 +124,7 @@ public enum AgoraApiAddress {
 	FACESET_DETAIL("获取人脸库列表及信息", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/faceset/getdetail"),
 
 	/**
-	 * 添加人脸 API
+	 * 添加人脸API
 	 * URL: https://console.faceplusplus.com.cn/documents/4888389
 	 */
 	FACE_ADD("添加人脸", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/faceset/addface"),
@@ -134,6 +134,38 @@ public enum AgoraApiAddress {
 	 */
 	FACE_REMOVE("删除人脸", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/faceset/removeface"),
 
+	/**
+	 * 添加人脸（异步） API
+	 * URL: https://console.faceplusplus.com.cn/documents/40622166
+	 */
+	FACE_ADD_ASYNC("添加人脸（异步）", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/faceset/async/addface"),
+	/**
+	 * 删除人脸（异步） API
+	 * URL: https://console.faceplusplus.com.cn/documents/40622169
+	 */
+	FACE_REMOVE_ASYNC("删除人脸（异步）", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/faceset/async/removeface"),
+	/**
+	 * 添加/删除人脸结果查询 API
+	 * URL: https://console.faceplusplus.com.cn/documents/40622157
+	 */
+	FACE_STATUS_ASYNC("添加/删除人脸结果查询", RequestMethod.POST," https://api-cn.faceplusplus.com/facepp/v3/faceset/async/task_status"),
+
+	// ---------------- 人脸库中的人脸管理 API 组 ------------------
+
+	/**
+	 * 自定义人脸信息 API
+	 * URL: https://console.faceplusplus.com.cn/documents/4888387
+	 */
+	FACE_SET_USERID("自定义人脸信息", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/face/setuserid"),
+
+	/**
+	 * 获取人脸信息  API
+	 * URL: https://console.faceplusplus.com.cn/documents/4888385
+	 */
+	FACE_GET_DETAIL("获取人脸信息 ", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/face/getdetail"),
+
+
+
 	// ---------------- 人脸识别 API 组 ------------------
 
 	/**
@@ -141,16 +173,23 @@ public enum AgoraApiAddress {
 	 * URL: https://console.faceplusplus.com.cn/documents/4888373
 	 */
 	FACE_DETECT("人脸检测", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/detect"),
+
 	/**
-	 * 获取用户列表
-	 * URL:  https://api.agora.io/v1/channel/user/{appid}/{channelName}
+	 * 人脸分析 API
+	 * URL: https://console.faceplusplus.com.cn/documents/4888383
 	 */
-	CHANNEL_USER_LIST("获取用户列表", RequestMethod.GET,"https://api.agora.io/dev/v1/channel/user/{0}/{1}"),
+	FACE_ANALYZE("人脸分析", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/face/analyze"),
+
 	/**
-	 * 分页查询项目的频道列表
-	 * URL:  https://api.agora.io/v1/channel/{appid}
+	 * 人脸比对 API
+	 * URL: https://console.faceplusplus.com.cn/documents/4887586
 	 */
-	CHANNEL_LIST("分页查询项目的频道列表", RequestMethod.GET,"https://api.agora.io/dev/v1/channel/{0}"),
+	FACE_COMPARE("人脸比对", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/compare"),
+	/**
+	 * 人脸搜索 API
+	 * URL: https://console.faceplusplus.com.cn/documents/4888381
+	 */
+	FACE_SEARCH("人脸搜索", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/search"),
 	 ;
 
 	private String opt;

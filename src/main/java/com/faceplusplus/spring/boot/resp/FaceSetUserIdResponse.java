@@ -15,39 +15,28 @@
  */
 package com.faceplusplus.spring.boot.resp;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.List;
-
 @Data
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude( JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class FaceDetectResponse extends FaceppResponse {
+public class FaceSetUserIdResponse extends FaceppResponse {
 
 	/**
-	 * 1、被检测的图片在系统中的标识
+	 * 1、人脸token
 	 */
-	@JsonProperty("image_id")
-	private String imageId;
+	@JsonProperty("face_token")
+	private String faceToken;
 
 	/**
-	 * 2、检测出的人脸个数
+	 * 2、用户自定义的标识信息
 	 */
-	@JsonProperty("face_num")
-	private Integer faceNum;
-
-	/**
-	 * 3、被检测出的人脸数组，具体包含内容见下文。
-	 * 注：如果没有检测出人脸则为空数组
-	 */
-	@JsonProperty("faces")
-	private JSONArray faces;
+	@JsonProperty("user_id")
+	private String userId;
 
 }

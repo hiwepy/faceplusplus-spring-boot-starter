@@ -15,11 +15,9 @@
  */
 package com.faceplusplus.spring.boot;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+public class FaceppFaceAsyncOperations extends FaceppFaceOperations {
 
-public class FaceppDetectAsyncOperations extends FaceppDetectOperations {
-
-	public FaceppDetectAsyncOperations(FaceppTemplate faceppTemplate) {
+	public FaceppFaceAsyncOperations(FaceppTemplate faceppTemplate) {
 		super(faceppTemplate);
 	}
 

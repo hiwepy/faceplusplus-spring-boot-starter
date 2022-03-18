@@ -17,6 +17,7 @@ package com.faceplusplus.spring.boot;
 
 import com.faceplusplus.spring.boot.resp.FaceAddResponse;
 import com.faceplusplus.spring.boot.resp.FaceRemoveResponse;
+import com.faceplusplus.spring.boot.resp.FaceStatusResponse;
 import com.google.common.collect.ImmutableMap;
 
 import java.io.IOException;
@@ -30,16 +31,16 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	}
 
 	/**
-	 * 3、人脸库管理相关接口 > 添加人脸 API
+	 * 1、人脸库管理相关接口 > 添加人脸（异步） API
 	 * 为一个已经创建的 FaceSet 添加人脸标识 face_token。一个 FaceSet 最多存储1,000个 face_token。
 	 * 注意：2017年8月16日后，一个 FaceSet 能够存储的 face_token 数量将从 1000 提升至 10000。
-	 * API：https://console.faceplusplus.com.cn/documents/4888389
+	 * API：https://console.faceplusplus.com.cn/documents/40622166
 	 * @param facesetToken FaceSet的标识
 	 * @param faceTokens 人脸标识 face_token 组成的字符串，可以是一个或者多个，用逗号分隔。最多不超过5个face_token
 	 * @return 操作结果
 	 */
 	public void asyncAddFaceWithToken(String facesetToken, String[] faceTokens, Consumer<FaceAddResponse> consumer) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD.getUrl();
+		String reqUrl = AgoraApiAddress.FACE_ADD_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -50,16 +51,16 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	}
 
 	/**
-	 * 3、人脸库管理相关接口 > 添加人脸 API
+	 * 2、人脸库管理相关接口 > 添加人脸（异步） API
 	 * 为一个已经创建的 FaceSet 添加人脸标识 face_token。一个 FaceSet 最多存储1,000个 face_token。
 	 * 注意：2017年8月16日后，一个 FaceSet 能够存储的 face_token 数量将从 1000 提升至 10000。
-	 * API：https://console.faceplusplus.com.cn/documents/4888389
+	 * API：https://console.faceplusplus.com.cn/documents/40622166
 	 * @param outerId 用户提供的FaceSet标识
 	 * @param faceTokens 人脸标识 face_token 组成的字符串，可以是一个或者多个，用逗号分隔。最多不超过5个face_token
 	 * @return 操作结果
 	 */
 	public void asyncAddFaceWithOuterId(String outerId, String[] faceTokens, Consumer<FaceAddResponse> consumer) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD.getUrl();
+		String reqUrl = AgoraApiAddress.FACE_ADD_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -70,7 +71,7 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	}
 
 	/**
-	 * 3、人脸库管理相关接口 > 删除人脸 API
+	 * 3、人脸库管理相关接口 > 删除人脸（异步） API
 	 * 移除一个FaceSet中的某些或者全部face_token
 	 * API：https://console.faceplusplus.com.cn/documents/4888399
 	 * @param facesetToken FaceSet的标识
@@ -79,7 +80,7 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	 * @return 操作结果
 	 */
 	public void asyncRemoveFaceByToken(String facesetToken, String[] faceTokens, Consumer<FaceRemoveResponse> consumer) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD.getUrl();
+		String reqUrl = AgoraApiAddress.FACE_REMOVE_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -90,16 +91,16 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	}
 
 	/**
-	 * 3、人脸库管理相关接口 > 删除人脸 API
+	 * 4、人脸库管理相关接口 > 删除人脸（异步） API
 	 * 移除一个FaceSet中的某些或者全部face_token
-	 * API：https://console.faceplusplus.com.cn/documents/4888399
+	 * API：https://console.faceplusplus.com.cn/documents/40622169
 	 * @param outerId 用户提供的FaceSet标识
 	 * @param faceTokens 需要移除的人脸标识字符串，可以是一个或者多个face_token组成，用逗号分隔。最多不能超过1,000个face_token
 	 * 注：face_tokens字符串传入“RemoveAllFaceTokens”则会移除FaceSet内所有的face_token
 	 * @return 操作结果
 	 */
 	public void asyncRemoveFaceByOuterId(String outerId, String[] faceTokens, Consumer<FaceRemoveResponse> consumer) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD.getUrl();
+		String reqUrl = AgoraApiAddress.FACE_REMOVE_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -109,5 +110,23 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 		getFaceppOkHttp3Template().doAsyncRequest(reqUrl, FaceppOkHttp3Template.HttpMethod.POST, consumer, FaceRemoveResponse.class);
 	}
 
+	/**
+	 * 5、人脸库管理相关接口 > 添加/删除人脸结果查询 API
+	 * 查询之前调用的异步添加/删除人脸请求，异步任务当前的状态
+	 * 注意：2017年8月16日后，一个 FaceSet 能够存储的 face_token 数量将从 1000 提升至 10000。
+	 * API：https://console.faceplusplus.com.cn/documents/40622157
+	 * @param taskId 异步任务的唯一标识
+	 * @return 操作结果
+	 */
+	public FaceStatusResponse getFaceStatusByTaskId(String taskId) throws IOException {
+		String reqUrl = AgoraApiAddress.FACE_STATUS_ASYNC.getUrl();
+		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
+				.put("task_id", taskId)
+				.build();
+		FaceStatusResponse resp = getFaceppOkHttp3Template().post(reqUrl, null, params,  FaceStatusResponse.class);
+		return resp;
+	}
 
 }
