@@ -190,6 +190,21 @@ public enum AgoraApiAddress {
 	 * URL: https://console.faceplusplus.com.cn/documents/4888381
 	 */
 	FACE_SEARCH("人脸搜索", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v3/search"),
+	/**
+	 * 皮肤分析-基础版 API
+	 * URL: https://console.faceplusplus.com.cn/documents/119745378
+	 */
+	FACE_SKIN_ANALYZE("皮肤分析-基础版", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v1/skinanalyze"),
+	/**
+	 * 皮肤分析-高阶版 API
+	 * URL: https://console.faceplusplus.com.cn/documents/140781002
+	 */
+	FACE_SKIN_ANALYZE_ADVANCED("皮肤分析-高阶版", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v1/skinanalyze_advanced"),
+	/**
+	 * 皮肤分析-专业版 API
+	 * URL: https://console.faceplusplus.com.cn/documents/307316314
+	 */
+	FACE_SKIN_ANALYZE_PRO("皮肤分析-专业版", RequestMethod.POST,"https://api-cn.faceplusplus.com/facepp/v1/skinanalyze_pro"),
 	 ;
 
 	private String opt;

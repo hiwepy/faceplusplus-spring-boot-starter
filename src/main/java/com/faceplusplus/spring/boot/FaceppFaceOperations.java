@@ -15,9 +15,7 @@
  */
 package com.faceplusplus.spring.boot;
 
-import com.faceplusplus.spring.boot.req.FaceAnalyzeOptions;
-import com.faceplusplus.spring.boot.req.FaceDetectOptions;
-import com.faceplusplus.spring.boot.req.FaceSearchOptions;
+import com.faceplusplus.spring.boot.req.*;
 import com.faceplusplus.spring.boot.resp.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
@@ -289,5 +287,64 @@ public class FaceppFaceOperations extends FaceppOperations {
 		return resp;
 	}
 
+	/**
+	 * 5、人脸识别 > 皮肤分析-基础版 API
+	 * 该API可对人脸图片，进行面部皮肤状态检测分析
+	 * API：https://console.faceplusplus.com.cn/documents/119745378
+	 * @param imageUrl 目标人脸所在的图片的 URL
+	 * @param options 可选参数
+	 * @return 操作结果
+	 */
+	public FaceSkinAnalyzeResponse skinAnalyzeUrl(String imageUrl, SkinAnalyzeType type, SkinAnalyzeOptions options) throws IOException {
+		String reqUrl = type.getApiAddress().getUrl();
+		Map params = new ImmutableMap.Builder<String, Object>()
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
+				.put("image_url", imageUrl)
+				.putAll(getObjectMapper().readValue(getObjectMapper().writeValueAsString(options), Map.class))
+				.build();
+		FaceSkinAnalyzeResponse resp = getFaceppOkHttp3Template().doPartRequest(reqUrl, params, FaceSkinAnalyzeResponse.class);
+		return resp;
+	}
+
+	/**
+	 * 5、人脸识别 > 皮肤分析-基础版 API
+	 * 该API可对人脸图片，进行面部皮肤状态检测分析
+	 * API：https://console.faceplusplus.com.cn/documents/119745378
+	 * @param imageBase64 base64 编码的二进制图片数据；如果同时传入了 image_url、image_file 和 image_base64 参数，本 API 使用顺序为 image_file 优先，image_url 最低。
+	 * @param options 可选参数
+	 * @return 操作结果
+	 */
+	public FaceSkinAnalyzeResponse skinAnalyzeBase64(String imageBase64, SkinAnalyzeType type, SkinAnalyzeOptions options) throws IOException {
+		String reqUrl = type.getApiAddress().getUrl();
+		Map params = new ImmutableMap.Builder<String, Object>()
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
+				.put("image_base64", imageBase64)
+				.putAll(getObjectMapper().readValue(getObjectMapper().writeValueAsString(options), Map.class))
+				.build();
+		FaceSkinAnalyzeResponse resp = getFaceppOkHttp3Template().doPartRequest(reqUrl, params, FaceSkinAnalyzeResponse.class);
+		return resp;
+	}
+
+	/**
+	 * 5、人脸识别 > 皮肤分析-基础版 API
+	 * 该API可对人脸图片，进行面部皮肤状态检测分析
+	 * API：https://console.faceplusplus.com.cn/documents/119745378
+	 * @param imageFile 目标人脸所在的图片，二进制文件，需要用 post multipart/form-data 的方式上传
+	 * @param options 可选参数
+	 * @return 操作结果
+	 */
+	public FaceSkinAnalyzeResponse skinAnalyzeFile(File imageFile, SkinAnalyzeType type, SkinAnalyzeOptions options) throws IOException {
+		String reqUrl = type.getApiAddress().getUrl();
+		Map params = new ImmutableMap.Builder<String, Object>()
+				.put("api_key", getFaceppProperties().getAppId())
+				.put("api_secret", getFaceppProperties().getAppCertificate())
+				.put("image_file", imageFile)
+				.putAll(getObjectMapper().readValue(getObjectMapper().writeValueAsString(options), Map.class))
+				.build();
+		FaceSkinAnalyzeResponse resp = getFaceppOkHttp3Template().doPartRequest(reqUrl, params, FaceSkinAnalyzeResponse.class);
+		return resp;
+	}
 
 }
