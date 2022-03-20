@@ -17,7 +17,6 @@ package com.faceplusplus.spring.boot;
 
 import com.faceplusplus.spring.boot.req.*;
 import com.faceplusplus.spring.boot.resp.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 
 import java.io.File;
@@ -44,7 +43,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceDetectResponse detectUrl(String imageUrl, FaceDetectOptions options) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_DETECT.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_DETECT.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -66,7 +65,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceDetectResponse detectBase64(String imageBase64, FaceDetectOptions options) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_DETECT.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_DETECT.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -88,7 +87,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceDetectResponse detectFile(File imageFile, FaceDetectOptions options) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_DETECT.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_DETECT.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -108,7 +107,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceAnalyzeResponse analyze(String[] faceTokens, FaceAnalyzeOptions options) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ANALYZE.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_ANALYZE.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -129,7 +128,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceCompareResponse compareUrl(String imageUrl1, String imageUrl2) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_COMPARE.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_COMPARE.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -150,7 +149,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceCompareResponse compareToken(String faceToken1, String faceToken2) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_COMPARE.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_COMPARE.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -171,7 +170,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceCompareResponse compareBase64(String imageBase64_1, String imageBase64_2) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_DETECT.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_DETECT.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -192,7 +191,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceCompareResponse compareFile(File imageFile1, File imageFile2) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_COMPARE.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_COMPARE.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -213,7 +212,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceSearchResponse searchUrl(String imageUrl, FaceSearchOptions options) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_COMPARE.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_COMPARE.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -234,7 +233,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceSearchResponse searchToken(String faceToken, FaceSearchOptions options) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_COMPARE.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_COMPARE.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -255,7 +254,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceSearchResponse searchBase64(String imageBase64, FaceSearchOptions options) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_DETECT.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_DETECT.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -276,7 +275,7 @@ public class FaceppFaceOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceSearchResponse searchFile(File imageFile, FaceSearchOptions options) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_SEARCH.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_SEARCH.getUrl();
 		Map params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())

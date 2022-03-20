@@ -40,7 +40,7 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	 * @return 操作结果
 	 */
 	public void asyncAddFaceWithToken(String facesetToken, String[] faceTokens, Consumer<FaceAddResponse> consumer) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD_ASYNC.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_ADD_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -60,7 +60,7 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	 * @return 操作结果
 	 */
 	public void asyncAddFaceWithOuterId(String outerId, String[] faceTokens, Consumer<FaceAddResponse> consumer) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD_ASYNC.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_ADD_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -80,7 +80,7 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	 * @return 操作结果
 	 */
 	public void asyncRemoveFaceByToken(String facesetToken, String[] faceTokens, Consumer<FaceRemoveResponse> consumer) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_REMOVE_ASYNC.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_REMOVE_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -100,7 +100,7 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	 * @return 操作结果
 	 */
 	public void asyncRemoveFaceByOuterId(String outerId, String[] faceTokens, Consumer<FaceRemoveResponse> consumer) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_REMOVE_ASYNC.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_REMOVE_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -119,7 +119,7 @@ public class FaceppFacesetAsyncOperations extends FaceppFacesetOperations {
 	 * @return 操作结果
 	 */
 	public FaceStatusResponse getFaceStatusByTaskId(String taskId) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_STATUS_ASYNC.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_STATUS_ASYNC.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())

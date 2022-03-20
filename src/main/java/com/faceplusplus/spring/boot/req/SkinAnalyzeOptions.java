@@ -1,12 +1,9 @@
 package com.faceplusplus.spring.boot.req;
 
-import com.faceplusplus.spring.boot.AgoraApiAddress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.function.Function;
 
 /**
  * 皮肤分析配置

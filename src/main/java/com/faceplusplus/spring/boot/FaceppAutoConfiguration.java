@@ -15,7 +15,7 @@ import okhttp3.OkHttpClient;
 
 @Configuration
 @EnableConfigurationProperties({ FaceppProperties.class})
-public class AgoraAutoConfiguration {
+public class FaceppAutoConfiguration {
 
 	@Bean
 	public FaceppOkHttp3Template agoraOkHttp3Template(ObjectProvider<OkHttpClient> okhttp3ClientProvider,

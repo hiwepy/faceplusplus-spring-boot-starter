@@ -1,4 +1,3 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.faceplusplus.spring.boot.AgoraAutoConfiguration,\
-com.faceplusplus.spring.boot.AgoraLocalRecordingConfiguration
+com.faceplusplus.spring.boot.FaceppAutoConfiguration

@@ -19,13 +19,10 @@ import com.faceplusplus.spring.boot.req.FacesetBo;
 import com.faceplusplus.spring.boot.req.FacesetDeleteBo;
 import com.faceplusplus.spring.boot.req.FacesetUpdateBo;
 import com.faceplusplus.spring.boot.resp.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,7 +44,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FacesetCreateResponse createFaceset(FacesetBo faceset) throws IOException {
-		String reqUrl = AgoraApiAddress.FACESET_CREATE.getUrl();
+		String reqUrl = FaceppApiAddress.FACESET_CREATE.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -65,7 +62,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FacesetCreateResponse deleteFaceset(FacesetDeleteBo faceset) throws IOException {
-		String reqUrl = AgoraApiAddress.FACESET_DELETE.getUrl();
+		String reqUrl = FaceppApiAddress.FACESET_DELETE.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -83,7 +80,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FacesetCreateResponse updateFaceset(FacesetUpdateBo faceset) throws IOException {
-		String reqUrl = AgoraApiAddress.FACESET_UPDATE.getUrl();
+		String reqUrl = FaceppApiAddress.FACESET_UPDATE.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -105,7 +102,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FacesetListResponse getFacesetList(int lastSequence, String... tags) throws IOException {
-		String reqUrl = AgoraApiAddress.FACESET_LIST.getUrl();
+		String reqUrl = FaceppApiAddress.FACESET_LIST.getUrl();
 		ImmutableMap.Builder builder = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -133,7 +130,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FacesetDetailResponse getFacesetByToken(String facesetToken, int lastSequence) throws IOException {
-		String reqUrl = AgoraApiAddress.FACESET_LIST.getUrl();
+		String reqUrl = FaceppApiAddress.FACESET_LIST.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -156,7 +153,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FacesetDetailResponse getFacesetByOuterId(String outerId, int lastSequence) throws IOException {
-		String reqUrl = AgoraApiAddress.FACESET_DETAIL.getUrl();
+		String reqUrl = FaceppApiAddress.FACESET_DETAIL.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -177,7 +174,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceAddResponse addFaceWithToken(String facesetToken, String ... faceTokens) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_ADD.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -198,7 +195,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceAddResponse addFaceWithOuterId(String outerId, String ... faceTokens) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_ADD.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_ADD.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -219,7 +216,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceRemoveResponse removeFaceByToken(String facesetToken, String ... faceTokens) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_REMOVE.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_REMOVE.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -240,7 +237,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceRemoveResponse removeFaceByOuterId(String outerId, String ... faceTokens) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_REMOVE.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_REMOVE.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -260,7 +257,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceSetUserIdResponse createFace(String faceToken, String userId) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_SET_USERID.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_SET_USERID.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())
@@ -279,7 +276,7 @@ public class FaceppFacesetOperations extends FaceppOperations {
 	 * @return 操作结果
 	 */
 	public FaceDetailResponse getFaceDetail(String faceToken) throws IOException {
-		String reqUrl = AgoraApiAddress.FACE_GET_DETAIL.getUrl();
+		String reqUrl = FaceppApiAddress.FACE_GET_DETAIL.getUrl();
 		Map<String, Object> params = new ImmutableMap.Builder<String, Object>()
 				.put("api_key", getFaceppProperties().getAppId())
 				.put("api_secret", getFaceppProperties().getAppCertificate())

@@ -6,7 +6,7 @@ import java.text.MessageFormat;
  * https://console.faceplusplus.com.cn/documents/268763412
  * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  */
-public enum AgoraApiAddress {
+public enum FaceppApiAddress {
 
 	// ---------------- 人脸识别相关 ------------------
 
@@ -212,7 +212,7 @@ public enum AgoraApiAddress {
 	private RequestMethod method;
 	private String url;
 
-    AgoraApiAddress(String opt, RequestMethod method,String url) {
+    FaceppApiAddress(String opt, RequestMethod method, String url) {
 		this.opt = opt;
 		this.method = method;
 		this.url = url;
