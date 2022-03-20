@@ -7,7 +7,6 @@ import org.junit.Test;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.faceplusplus.spring.boot.resp.AcquireResourceResponse;
 import okhttp3.OkHttpClient;
 
 public class FaceppTemplate_Test {
@@ -28,15 +27,6 @@ public class FaceppTemplate_Test {
 		template = new FaceppTemplate(faceppOkHttp3Template, properties );
 
 	}
-
-	//@Test
-	public void testAcquireId() throws Exception {
-
-		AcquireResourceResponse response =  template.opsForCloudRecording().acquireId("10000", "121212");
-		System.out.println(objectMapper.writeValueAsString(response));
-
-	}
-
 
 	@Test
 	public void testGetChannelUserState() throws Exception {
