@@ -3,7 +3,6 @@ package com.faceplusplus.spring.boot;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * https://docs.agora.io/cn/Interactive%20Broadcast/rtc_channel_event?platform=RESTful
  * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  */
 @Slf4j
@@ -14,8 +13,6 @@ public class FaceppTemplate {
 
 	private final FaceppFacesetAsyncOperations facesetOps = new FaceppFacesetAsyncOperations(this);
 	private final FaceppFaceAsyncOperations faceDetectOps = new FaceppFaceAsyncOperations(this);
-	private final FaceppCloudRecordingAsyncOperations cloudRecordingOps = new FaceppCloudRecordingAsyncOperations(this);
-
 
 
 	public FaceppTemplate(FaceppOkHttp3Template faceppOkHttp3Template, FaceppProperties faceppProperties) {
@@ -29,9 +26,6 @@ public class FaceppTemplate {
 
 	public FaceppFaceAsyncOperations opsForFaceDetect() {
 		return faceDetectOps;
-	}
-	public FaceppCloudRecordingAsyncOperations opsForCloudRecording() {
-		return cloudRecordingOps;
 	}
 
 	public FaceppProperties getFaceppProperties() {
